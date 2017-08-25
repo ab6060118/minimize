@@ -8,17 +8,20 @@ const style = {
     backgroundColor: 'rgba(0,0,0,0.1)',
   },
   window: {
-    position: 'absolute',
-    height: '60vh',
+    position: 'fixed',
+    height: '500px',
     width: '40vw',
     top: '15vh',
-    left: '30vw',
+    right: '30vw',
     backgroundColor: 'white',
     borderRadius: '5px',
     boxShadow: '0 20px 40px rgba(0, 0, 0, .4)',
-    transition: 'height 3s',
+    transition: 'top .3s, right .3s',
   },
   tool: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    width: '100%',
     height: '30px',
     borderBottom: '1px solid black',
   },
@@ -46,7 +49,20 @@ window.append(tool)
 container.append(window)
 
 min.click(function() {
-  window.css({height: '30px'})
+  if(window.data('min') == true) {
+    tool.css({top: '0'})
+    window.css({width: '40vw'})
+    window.css({top: '15vh'})
+    window.css({right: '30vw'})
+    window.data('min', false)
+  }
+  else {
+    tool.css({top: '-30px'})
+    window.css({width: '180px'})
+    window.css({top: '100vh'})
+    window.css({right: '0'})
+    window.data('min', true)
+  }
 });
 
 $('body').css(style.body).append(container)
